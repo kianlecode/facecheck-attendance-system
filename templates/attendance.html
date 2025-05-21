@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Điểm danh khuôn mặt</title>
+  <link rel="icon" href="static/img/neu-logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <script src="/static/js/utils.js" defer></script>
+  <script src="/static/js/attendance.js" defer></script>
+</head>
+<body>
+  <div class="attendance-container">
+    <div class="attendance-card">
+      <h2>Điểm danh</h2>
+
+      <!-- Chọn phiên -->
+      <div class="session-select">
+        <label for="session_id">Chọn phiên điểm danh:</label>
+        <select id="session_id" required></select>
+      </div>
+
+      <!-- Camera -->
+      <div class="camera-wrapper">
+        <video id="camera" autoplay muted playsinline></video>
+        <canvas id="overlay"></canvas>
+      </div>
+
+      <!-- Bước hướng dẫn -->
+      <p id="faceStepMsg"></p>
+
+      <!-- Nút thao tác -->
+      <div class="attendance-btn-group">
+        <button id="startCaptureBtn" class="btn">Bắt đầu</button>
+        <button id="resetCaptureBtn" class="btn btn-secondary">Chụp lại</button>
+      </div>
+
+      <!-- Nút xác nhận -->
+      <div style="text-align: center; margin-top: 1rem;">
+        <button id="submitRegisterBtn" class="btn w-full" style="width: 500px; margin: 0 auto; display: block;">Điểm danh</button>
+      </div>
+
+      <!-- Thông báo -->
+      <p id="msg" class="status-msg"></p>
+
+      <!-- Quay lại -->
+      <a href="/student.html" class="btn btn-secondary w-full" style="text-decoration: none; width: 500px; margin: 0 auto; display: block;">Quay lại</a>
+    </div>
+  </div>
+</body>
+</html>

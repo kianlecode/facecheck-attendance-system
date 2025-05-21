@@ -1,0 +1,23 @@
+# Core backend
+fastapi==0.110.0
+uvicorn==0.34.0
+python-multipart==0.0.20
+bcrypt==4.3.0
+pydantic==2.10.6
+pytz==2025.1
+jinja2==3.1.6
+openpyxl==3.1.5
+pyodbc==5.2.0
+
+# Face recognition
+deepface==0.0.93
+opencv-python==4.11.0.86
+numpy==2.1.3
+pandas==2.2.3
+ultralytics
+mediapipe==0.10.21
+faiss-cpu 
+
+# DeepFace dependencies
+tensorflow==2.19.0
+tf_keras==2.19.0

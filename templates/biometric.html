@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng ký</title>
+  <link rel="icon" href="static/img/neu-logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <script src="/static/js/utils.js" defer></script>
+  <script src="/static/js/biometric.js" defer></script>
+</head>
+<body>
+  <div class="biometric-container">
+    <div class="biometric-card">
+      <h2>Đăng ký ảnh khuôn mặt</h2>
+
+      <!-- Camera -->
+      <div class="camera-wrapper">
+        <video id="camera" autoplay muted playsinline></video>
+        <canvas id="overlay"></canvas>
+      </div>
+
+      <!-- Thông báo bước quét -->
+      <p id="faceStepMsg"></p>
+
+      <!-- Nút thao tác -->
+      <div class="flex gap-2" style="justify-content: center; margin: 1rem 0;">
+        <button id="startCaptureBtn" class="btn">Bắt đầu</button>
+        <button id="resetCaptureBtn" class="btn btn-secondary">Chụp lại</button>
+      </div>
+
+      <!-- Ảnh xem trước -->
+
+      <div class="preview-face-container">
+        <div class="preview-face-item">
+          <img id="preview_front" class="preview-face-img" />
+          <p>Chính diện</p>
+        </div>
+        <div class="preview-face-item">
+          <img id="preview_left" class="preview-face-img" />
+          <p>Trái</p>
+        </div>
+        <div class="preview-face-item">
+          <img id="preview_right" class="preview-face-img" />
+          <p>Phải</p>
+        </div>
+      </div>
+
+      <!-- Nút xác nhận -->
+      <div style="text-align: center; margin: 1rem 0;">
+        <button id="submitRegisterBtn" class="btn w-full" style="width: 500px; margin: 0 auto; display: block;">Xác nhận</button>
+        <p id="biometric-message" class="mt-2"></p>
+      </div>
+
+      <!-- Thông báo -->
+      <p id="msg" class="text-center mt-2"></p>
+
+      <!-- Quay lại -->
+      <a href="/register.html" class="btn btn-secondary w-full" style="text-decoration: none; width: 500px; margin: 0 auto; display: block;">Quay lại</a>
+    </div>
+  </div>
+
+  <script type="module">
+    import {
+      FaceLandmarker,
+      FilesetResolver
+    } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
+
+    const vision = await FilesetResolver.forVisionTasks(
+      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"
+    );
+
+    const faceLandmarker = await FaceLandmarker.createFromOptions(vision, {
+      baseOptions: {
+        modelAssetPath: "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        delegate: "GPU"
+      },
+      outputFaceBlendshapes: true,
+      outputFacialTransformationMatrixes: true,
+      runningMode: "VIDEO"
+    });
+
+    window.faceLandmarker = faceLandmarker;
+  </script>
+</body>
+</html>

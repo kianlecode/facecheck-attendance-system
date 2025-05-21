@@ -1,0 +1,13 @@
+# Ignore dữ liệu khuôn mặt và FAISS
+data/
+face_data/
+*.pt
+*.faiss
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore logs và tạm thời
+*.log
+.envSS

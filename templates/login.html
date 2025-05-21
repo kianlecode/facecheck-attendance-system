@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng nhập</title>
+  <link rel="icon" href="static\img\neu-logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <script src="/static/js/utils.js" defer></script>
+  <script src="/static/js/login.js" defer></script>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card">
+      <img src="/static/img/neu-logo.png" alt="Logo" class="logo" style="width: 100px; display: block; margin: 0 auto 1rem;" />
+      <h2>Đăng nhập hệ thống</h2>
+
+      <form id="loginForm">
+        <input type="text" id="user_id" name="user_id" placeholder="Mã người dùng" required />
+
+        <div class="password-input-wrapper">
+          <input type="password" id="password" name="password" placeholder="Mật khẩu" required />
+          <button type="button"
+                  class="password-toggle-button"
+                  onmousedown="togglePassword('password', true)"
+                  onmouseup="togglePassword('password', false)"
+                  onmouseleave="togglePassword('password', false)">
+            👁
+          </button>
+        </div>
+
+        <button type="submit" class="btn w-full mt-2">Đăng nhập</button>
+      </form>
+
+      <p id="loginMsg" class="error-msg"></p>
+      <p class="text-muted mt-2">📝 Chưa có tài khoản? <a href="/register.html">Đăng ký tại đây</a></p>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(id, show) {
+      const input = document.getElementById(id);
+      if (input) input.type = show ? 'text' : 'password';
+    }
+  </script>
+</body>
+</html>

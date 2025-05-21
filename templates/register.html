@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng ký tài khoản</title>
+  <link rel="icon" href="static\img\neu-logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <script src="/static/js/utils.js" defer></script>
+  <script src="/static/js/register.js" defer></script>
+</head>
+<body>
+  <div class="register-container">
+    <div class="register-card">
+      <h2>Đăng ký tài khoản</h2>
+
+      <form id="registerForm">
+        <input type="text" id="user_id" placeholder="Mã người dùng" required />
+        <input type="text" id="name" placeholder="Họ và tên" required />
+
+        <div class="register-password-wrapper">
+          <input type="password" id="password" placeholder="Mật khẩu" required />
+          <button type="button"
+                  class="register-password-toggle"
+                  onmousedown="togglePassword('password', true)"
+                  onmouseup="togglePassword('password', false)"
+                  onmouseleave="togglePassword('password', false)">
+            👁
+          </button>
+        </div>
+
+        <input type="text" id="phone_number" placeholder="Số điện thoại" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <p id="registerMsg"></p>
+        <button type="submit" id="nextToBiometricBtn" class="btn w-full" style="width: 416px; margin-bottom: 0.7rem; display: block;">Tiếp tục</button>
+      </form>
+
+      
+      <a href="/" class="btn btn-secondary w-full" style="text-decoration: none; width: 416px; margin: 0 auto; display: block; border-radius: 0.5rem; height: 44px;">Quay lại</a>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(id, show) {
+      const input = document.getElementById(id);
+      if (input) input.type = show ? 'text' : 'password';
+    }
+  </script>
+</body>
+</html>

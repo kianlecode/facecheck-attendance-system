@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trang quản trị</title>
+  <link rel="icon" href="static/img/neu-logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <script src="/static/js/utils.js" defer></script>
+  <script src="/static/js/admin.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="admin-wrapper">
+    <div class="admin-layout">
+      <!-- Sidebar -->
+      <div class="admin-sidebar">
+        <h2>Quản trị viên</h2>
+        <ul>
+          <li><a href="#" class="active" data-section="list" onclick="showSection('list')">Quản lý người dùng</a></li>
+          <li><a href="#" data-section="create" onclick="showSection('create')">Tạo tài khoản</a></li>
+          <li><a href="#" data-section="info" onclick="showSection('info')">Thông tin tài khoản</a></li>
+          <li><a href="#" class="logout-button mt-4" onclick="showModalLogout()">Đăng xuất</a></li>
+        </ul>
+      </div>
+
+      <!-- Main content -->
+      <div class="admin-main">
+        <h1>Xin chào, <span id="admin-name">Admin</span></h1>
+
+        <!-- Tạo tài khoản -->
+        <section id="section-create" style="display: none;">
+          <form id="create-teacher-form">
+            <label for="user_id">Mã người dùng:</label>
+            <input type="text" id="user_id" required />
+
+            <label for="name">Họ tên:</label>
+            <input type="text" id="name" required />
+
+            <label for="phone_number">Số điện thoại:</label>
+            <input type="text" id="phone_number" required />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required />
+
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" required />
+
+            <label for="role">Quyền tài khoản:</label>
+            <select id="role" required style="max-width: 400px;">
+              <option value="student">Sinh viên</option>
+              <option value="teacher">Giảng viên</option>
+              <option value="admin">Quản trị</option>
+            </select>
+
+            <div style="margin-top: 1rem;">
+              <button type="submit" class="btn">Tạo tài khoản</button>
+            </div>
+          </form>
+          <p id="admin-message"></p>
+        </section>
+
+        <!-- Quản lý tài khoản người dùng -->
+        <section id="section-list">
+          <div class="filter-bar">
+            <input type="text" id="search-input" placeholder="🔍 Tìm theo tên, email..." style="margin-bottom: 0px;"/>
+            <select id="account-role-filter" style="margin-bottom: 0px;">
+              <option value="">Tất cả vai trò</option>
+              <option value="student">Sinh viên</option>
+              <option value="teacher">Giảng viên</option>
+              <option value="admin">Quản trị</option>
+            </select>
+            <button id="load-accounts">🔄 Tải danh sách</button>
+            <button id="export-excel">Xuất Excel</button>
+          </div>
+          <div id="accounts-list">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Họ tên</th>
+                  <th>SĐT</th>
+                  <th>Email</th>
+                  <th>Vai trò</th>
+                  <th>Ngày tạo</th>
+                  <th>Trạng thái</th>
+                  <th>Cập nhật ảnh</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="account-table-body">
+                <!-- JS sẽ render dữ liệu -->
+              </tbody>
+            </table>
+            <div id="pagination" class="pagination-bar"></div>
+          </div>
+        </section>
+
+        <!-- Thông tin tài khoản -->
+        <section id="section-info" style="display: none;">
+          <div id="account-info"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Modal xác nhận đăng xuất -->
+  <div id="modal-logout" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 400px; position: relative;">
+      <span class="close" onclick="closeModalLogout()" style="position: absolute; top: 10px; right: 10px; font-size: 24px; cursor: pointer;">&times;</span>
+      <h3>Đăng xuất</h3>
+      <p>Bạn có chắc chắn muốn đăng xuất?</p>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
+        <button class="btn btn-secondary" onclick="closeModalLogout()">Huỷ</button>
+        <button id="modal-logout-confirm" class="btn btn-red">Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script chuyển section -->
+  <script>
+    function showSection(section) {
+      ['create', 'list', 'info'].forEach(id => {
+        const el = document.getElementById(`section-${id}`);
+        if (el) el.style.display = 'none';
+      });
+
+      const target = document.getElementById(`section-${section}`);
+      if (target) target.style.display = 'block';
+
+      document.querySelectorAll('.admin-sidebar a').forEach(a => a.classList.remove('active'));
+      const targetLink = document.querySelector(`.admin-sidebar a[data-section="${section}"]`);
+      if (targetLink) targetLink.classList.add('active');
+
+      if (section === 'info') loadAdminInfo();
+    }
+  </script>
+</body>
+</html>

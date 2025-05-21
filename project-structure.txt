@@ -1,0 +1,57 @@
+FACECHECK-ATTENDANCE-SYSTEM-MAIN/
+├── main.py                         # Entry point FastAPI
+├── requirements.txt                # Cấu trúc project
+├── README.md                       # Mô tả hệ thống
+├── requirements.txt                # Danh sách thư viện
+
+├── api/                            # Các route API
+│   ├── admin.py
+│   ├── attendance.py
+│   ├── face_processing.py
+│   ├── faiss_engine.py
+│   ├── login.py
+│   ├── notification.py
+│   ├── register.py
+│   ├── student.py
+│   └── teacher.py
+
+├── models/                         # Kết nối và khởi tạo database + YOLO model
+│   ├── __init__.py
+│   ├── db.py                       # Khởi tạo database
+│   ├── manage_db.py                # Điều chỉnh database
+│   ├── yolov8m.pt                  # YOLOv8 model
+│   └── yolov8n-face.pt             # YOLOv8 fine-tuned model
+
+├── data/
+│   └── face_data/                  # Dữ liệu FAISS
+│       ├── face_index.faiss        # FAISS index
+│       └── id_map.json             # Map user_id → vector index
+
+├── face_images/                    # Ảnh khuôn mặt đã xử lý
+│   ├── front/                      # Ảnh chính diện
+│   ├── left/                       # Ảnh góc trái
+│   └── right/                      # Ảnh góc phải
+
+├── static/
+│   ├── img/
+│   │   └── neu-logo.png            # Logo trường
+│   ├── js/                         # JS chia theo trang
+│   │   ├── admin.js
+│   │   ├── attendance.js
+│   │   ├── biometric.js
+│   │   ├── login.js
+│   │   ├── register.js
+│   │   ├── student.js
+│   │   ├── teacher.js
+│   │   └── utils.js
+│   └── style.css                   # Giao diện CSS chung
+
+├── templates/                      # HTML frontend
+│   ├── admin.html
+│   ├── attendance.html
+│   ├── biometric.html
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── student.html
+│   └── teacher.html

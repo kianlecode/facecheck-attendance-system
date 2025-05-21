@@ -1,0 +1,1585 @@
+/* ========================
+   🌐 Layout toàn cục
+========================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom right, #e3f2fd, #f8fafc);
+  color: #111827;
+  height: 100%;
+  overflow: auto;
+}
+
+/* ========================
+   🏠 Index Page
+========================= */
+.index-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #e3f2fd, #f8fafc);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.index-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.index-card img.logo {
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+.index-card h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #003366;
+}
+
+.index-card p.description {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.index-card .menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.index-card .link-button {
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.index-card .link-button:hover {
+  background-color: #1e40af;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.index-card .credit {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 2rem;
+}
+
+/* ========================
+   🧩 Student
+========================= */
+.student-wrapper {
+  background: linear-gradient(to bottom right, #e3f2fd, #f8fafc);
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.student-layout {
+  display: flex;
+  width: 100%;
+  max-width: 2000px;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  min-height: 650px;
+}
+
+.student-sidebar {
+    width: 250px;
+    background-color: #0b3c5d;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: auto;
+}
+
+.student-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.student-sidebar li {
+    margin-bottom: 12px;
+}
+
+.student-sidebar a {
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  transition: background-color 0.2s;
+}
+
+.student-sidebar a:hover,
+.student-sidebar a.active {
+  background-color: #145374;
+}
+
+.student-main {
+  flex-grow: 1;
+  padding: 30px 40px;
+  background-color: #f9fbfd;
+  overflow: auto;
+}
+
+.student-sidebar h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 4px;
+}
+
+
+.tab-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tab-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e5e7eb;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tab-button.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+#enroll-form {
+  max-width: 400px;
+  width: 100%;
+}
+
+#enroll-form input {
+  width: 100%;
+}
+/* ========================
+   🔘 Nút hành động
+========================= */
+.btn, .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  line-height: 1.25;
+  gap: 0.5rem;
+  box-sizing: border-box;
+}
+
+.btn {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #1e40af;
+}
+
+.btn-secondary {
+  background-color: #e5e7eb;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #d1d5db;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #b02a37;
+}
+
+.link-button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #2563eb;
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+}
+
+.link-button:hover {
+  background-color: #1e40af;
+}
+
+/* Gói ô nhập mật khẩu lớp */
+.password-input-wrapper {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 1rem; /* khớp spacing như các input khác */
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding-right: 2.5rem; 
+}
+
+
+/* Nút 👁️ hiển thị mật khẩu khi giữ chuột */
+.password-toggle-button {
+  position: absolute;
+  top: 37%;
+  right: 8px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5em;
+}
+
+
+
+/* ========================
+   🧩 Tiện ích spacing
+========================= */
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 3rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.flex { display: flex; }
+.block { display: block; }
+.text-center { text-align: center; }
+.text-muted { color: #6b7280; }
+.w-full { width: 100%; }
+
+/* ========================
+   📦 Form elements
+========================= */
+input, select, textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+h1, h2 {
+  color: #003366;
+}
+
+.pagination-bar {
+  display: flex;
+  justify-content: center; /* ✅ Căn giữa ngang */
+  align-items: center;
+  gap: 6px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.pagination-bar .pagination-button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination-bar .pagination-button:hover {
+  background-color: #e0e0e0;
+}
+
+.pagination-bar .pagination-button.active {
+  background-color: #0d6efd;
+  color: white;
+  font-weight: bold;
+  border-color: #0d6efd;
+}
+
+.form-create {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin-top: 1rem;
+}
+/* ========================
+   🔐 Thông tin tài khoản
+========================= */
+.profile-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+
+.avatar-section {
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+}
+
+.info-section {
+  flex: 1;
+  min-width: 280px;
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-table th,
+.info-table td {
+  border: 1px solid #d1d5db;
+  padding: 12px 16px;
+}
+
+.info-table th {
+  background-color: #f0f0f0; /* giống teacher */
+  color: #333;
+  text-align: left;
+  padding: 10px;
+  width: 200px;
+}
+
+.info-table td {
+  background-color: white;
+  padding: 10px;
+}
+
+.info-edit input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.info-edit label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+
+/* ========================
+   🔐 Login
+========================= */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #e3f2fd, #f8fafc);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.login-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #003366;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-card input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+.login-card .btn {
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-card .btn:hover {
+  background-color: #1e40af;
+}
+
+.login-card .text-muted {
+  color: #6b7280;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login-card .error-msg {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+
+/* ========================
+   📋 Layout cho trang Register
+========================= */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #e3f2fd, #f8fafc);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.register-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.register-card h2 {
+  margin-bottom: 1.5rem;
+  color: #003366;
+}
+
+.register-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-card input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+.register-card button:not(.register-password-toggle) {
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+}
+
+.register-card button:hover:not(.register-password-toggle) {
+  background-color: #1e40af;
+}
+
+.register-card .link-button {
+  display: block;
+  padding: 12px;
+  margin-top: 1rem;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.register-card .link-button:hover {
+  background-color: #0056b3;
+}
+
+#registerMsg {
+  margin-top: 0.5rem;
+  text-align: center;
+  color: red;
+  font-size: 0.95rem;
+}
+
+/* 👁️ Wrapper mật khẩu chỉ dùng trong trang register */
+.register-password-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.register-password-wrapper input {
+  all: unset; /* reset style thừa */
+  text-align: left;    
+  flex: 1;
+  font-size: 1rem;
+}
+
+/* 👁️ Toggle icon giữ để hiện mật khẩu */
+.register-password-toggle {
+  all: unset;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  line-height: 1;
+}
+
+/* ========================
+   📋 Layout Biometric
+========================= */
+.biometric-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #e3f2fd, #f8fafc);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.biometric-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.biometric-card h2 {
+  margin-bottom: 1.5rem;
+  color: #003366;
+}
+
+.camera-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 360px;
+  margin: 2rem auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+#camera {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#faceStepMsg {
+  margin: 1rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.preview-face-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.preview-face-item {
+  text-align: center;
+}
+
+.preview-face-img {
+  width: 100px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+}
+
+/* ========================
+   🛠️ Admin Layout (Tách biệt)
+========================= */
+.admin-wrapper {
+    background: linear-gradient(to bottom right, #e3f2fd, #f8fafc);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    box-sizing: border-box;
+    height: 100vh;
+}
+
+.admin-layout {
+  display: flex;
+  width: 100%;
+  max-width: 2000px;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  min-height: 650px;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: #0b3c5d;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.admin-sidebar h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 4px;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-sidebar li {
+  margin-bottom: 12px;
+}
+
+.admin-sidebar a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar a.active {
+  background-color: #005599;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 2rem;
+  background: white;
+  min-height: 600px;
+}
+
+/* Table và Form (nếu cần dùng lại) */
+.admin-main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.admin-main th, .admin-main td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.admin-main th {
+  background-color: #003366;
+  color: white;
+}
+
+.admin-main tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.admin-main tr:hover {
+  background-color: #e1f0ff;
+}
+
+.admin-main input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.admin-main button:not(.pagination-button) {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-width: 100px;
+  text-align: center;
+  white-space: nowrap;  
+}
+
+.admin-main button:hover {
+  background-color: #1e40af;
+}
+
+.admin-main .admin-logout {
+  background-color: #dc3545;
+  margin-top: 2rem;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.admin-main .admin-logout:hover {
+  background-color: #b02a37;
+}
+
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.filter-bar input,
+.filter-bar select {
+  height: 40px;
+  font-size: 14px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  width: 300px;
+}
+
+.filter-bar button {
+  background-color: #f1f1f1;
+  color: #222;
+  font-weight: 500;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0 16px;
+  height: 40px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.filter-bar button:hover {
+  background-color: #e0e0e0;
+  border-color: #aaa;
+}
+
+
+/* ========================
+   👨‍🏫 Teacher Layout
+========================= */
+.teacher-wrapper {
+  background: linear-gradient(to bottom right, #e3f2fd, #f8fafc);
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.teacher-layout {
+  display: flex;
+  width: 100%;
+  max-width: 2000px;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  min-height: 650px;
+}
+
+.teacher-content-scroll {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  
+}
+
+.teacher-sidebar {
+  width: 250px;
+  background-color: #0b3c5d;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: auto;
+}
+
+.teacher-sidebar h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 4px;
+}
+
+.teacher-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.teacher-sidebar li {
+  margin-bottom: 12px;
+}
+
+.teacher-sidebar a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.teacher-sidebar a:hover,
+.teacher-sidebar a.active {
+  background-color: #005599;
+}
+
+.teacher-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.teacher-main h2,
+.teacher-main h3 {
+  color: #003366;
+  margin-bottom: 1rem;
+}
+
+.teacher-main input,
+.teacher-main select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.teacher-main button:not(.class-key-toggle):not(.pagination-button):not(.tab-button):not(.btn-blue):not(.class-actions button) {
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+}
+
+.teacher-main button:hover:not(.class-key-toggle):not(.tab-button):not(.class-actions button) {
+  background-color: #1e40af;
+}
+
+.teacher-main #attendance_result {
+  margin-top: 1.5rem;
+}
+
+.teacher-sidebar .teacher-logout {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-top: 2rem;
+  padding: 10px;
+  background: linear-gradient(to right, #dc3545, #e55353);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  gap: 8px;
+}
+
+.teacher-sidebar .teacher-logout:hover {
+  background: linear-gradient(to right, #c82333, #dc3545);
+}
+
+.class-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+
+/* ✅ Bảng điểm danh */
+#attendance_result table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+#attendance_result th, #attendance_result td {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+#attendance_result th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333;
+}
+
+#attendance_result tr:last-child td {
+  border-bottom: none;
+}
+
+.class-card {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  transition: transform 0.2s;
+}
+
+.class-card:hover {
+  transform: translateY(-4px);
+}
+
+.class-cover {
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+}
+
+.class-info {
+  padding: 16px;
+}
+
+.class-id {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.class-name {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.class-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+
+.class-actions button {
+  flex: 1;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+
+.class-actions button:hover {
+  background-color: #bae6fd;
+}
+
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.class-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 500px; /* Hoặc 100% nếu bạn muốn full */
+  justify-content: space-between;
+}
+
+.collapse {
+  display: none;
+  margin-top: 10px;
+}
+.collapse table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.collapse th, .collapse td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+/* =====================
+ ✅ Modal style (chung) 
+===================== */
+.modal {
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  position: relative;
+  display: inline-block;
+  padding: 20px;
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  z-index: 10;
+}
+.modal table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.modal th, .modal td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+.modal th {
+  background-color: #f4f4f4;
+}
+.btn-red {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-red:hover {
+  background-color: #c9302c;
+}
+.btn-blue {
+  background-color: #0275d8;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-blue:hover {
+  background-color: #025aa5;
+}
+.modal-footer {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.btn-red {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-red:hover {
+  background-color: #c9302c;
+}
+
+/* ✅ Bảng hiển thị sinh viên trong modal */
+#studentModal table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  table-layout: auto; /* ✅ Cho phép co giãn theo nội dung */
+}
+
+#studentModal th, #studentModal td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+#studentModalBody {
+  max-height: 400px;
+  width: 900px;
+  overflow-y: auto;
+}
+
+#studentModal th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+#sessionModal table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+}
+
+#sessionModal th, #sessionModal td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+#sessionModal th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.btn-action {
+  display: inline-block;
+  width: 150px;
+  padding: 8px 12px;
+  margin: 4px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+}
+
+.btn-action:hover {
+  background-color: #f1f1f1;
+}
+
+.class-key-wrapper {
+  margin-top: 10px;
+}
+
+.key-input-container {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+}
+
+.class-key-pass {
+  width: 100%;
+  height: 40px;
+  padding: 8px 44px 8px 12px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.class-key-toggle {
+  all: unset;
+  position: absolute;
+  right: 10px;
+  transform: translateY(-160%);
+  height: 0px;
+  width: 24px;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-student-input {
+  padding: 10px 12px;
+  height: 40px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.add-student-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+}
+
+.add-student-btn {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-student-btn:hover {
+  background-color: #0069d9;
+}
+
+.student-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.student-table th, .student-table td {
+  padding: 10px;
+  text-align: center;
+}
+
+/* ========================
+   🧾 Attendance Page Layout
+========================= */
+.attendance-container {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;       /* ✅ Cho phép scroll toàn khối */
+}
+
+.attendance-card {
+  background: white;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.attendance-card h2 {
+  color: #003366;
+  font-size: 1.2rem;
+}
+
+.session-select {
+  text-align: left;
+}
+
+.session-select label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.session-select select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+#camera {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#faceStepMsg {
+  margin: 1rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.attendance-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.preview-face-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.preview-face-item {
+  text-align: center;
+}
+
+.preview-face-img {
+  width: 100px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+}
+
+.status-msg {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #e11d48; /* đỏ cảnh báo */
+}
+
+.back-link {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.back-link:hover {
+  color: #1e40af;
+  text-decoration: underline;
+}
+
+/* ------------ */
+/* Notification */
+/* ------------ */
+.notification-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.notif-item {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.notif-item.unread {
+  background-color: #e0f2fe;
+  font-weight: 500;
+}
+
+.notif-message {
+  margin-bottom: 4px;
+}
+
+.notif-date {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.notif-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  background-color: red;
+  border-radius: 999px;
+  padding: 2px 6px;
+  margin-left: 6px;
+  display: none;
+}
+
+.notif-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.notif-item.unread {
+  background-color: #e2e8f0; /* nền xám nhẹ */
+  font-weight: 500;
+}
+
+.notif-item:hover {
+  background-color: #cbd5e1;
+}

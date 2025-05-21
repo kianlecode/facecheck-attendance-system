@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trang sinh viên</title>
+  <link rel="icon" href="static\img\neu-logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <script src="/static/js/utils.js" defer></script>
+  <script src="/static/js/student.js" defer></script>
+</head>
+<body>
+  <div class="student-wrapper">
+    <div class="student-layout">
+      <!-- Sidebar -->
+      <div class="student-sidebar">
+        <h2>Sinh viên</h2>
+        <ul>
+          <li><a href="#" class="active" data-section="attendance" onclick="showSection('attendance')">Điểm danh</a></li>
+          <li><a href="#" data-section="classes" onclick="showSection('classes')">Lớp học phần</a></li>
+          <li><a href="#" data-section="notifications" onclick="showSection('notifications')">Thông báo <span id="notif-badge" class="notif-badge"></span></a></li>
+          <li><a href="#" data-section="info" onclick="showSection('info')">Thông tin tài khoản</a></li>
+          <li class="mt-4"><a href="#" class="logout-button" onclick="showModalLogout()">Đăng xuất</a></li>
+        </ul>
+      </div>
+
+      <!-- Main content -->
+      <div class="student-main">
+        <h1>Xin chào, <span id="student-name">Sinh viên</span></h1>
+
+        <!-- Section: Điểm danh -->
+        <section id="section-attendance">
+          <p>Nhấn vào nút bên dưới để thực hiện điểm danh:</p>
+          <a href="/attendance.html" class="btn mt-2">Bắt đầu điểm danh</a>
+        </section>
+
+        <!-- Section: Lớp học phần -->
+        <section id="section-classes" style="display: none;">
+          <div class="tab-bar">
+            <button class="tab-button" data-tab="list" onclick="switchClassTab('list')">Lớp đã đăng ký</button>
+            <button class="tab-button active" data-tab="enroll" onclick="switchClassTab('enroll')">Tham gia lớp</button>
+          </div>
+
+          <div id="class-tab-list" style="display: none;">
+            <div class="filter-bar">
+              <input type="text" id="student-class-search" placeholder="🔍 Tìm theo mã hoặc tên lớp...">
+            </div>
+            <div id="registered-classes-wrapper">
+              <div id="registered-classes" class="class-grid"></div>
+              <div id="studentPagination" class="pagination-bar"></div>
+            </div>
+          </div>
+
+          <div id="class-tab-enroll">
+            <form id="enroll-form" class="mb-4">
+              <label for="enroll-class-id">Mã lớp:</label>
+              <input type="text" id="enroll-class-id" placeholder="VD: CNTT63B" required />
+              <label for="enroll-class-key">Mã đăng ký:</label>
+              <div class="password-input-wrapper">
+                <input type="password" id="enroll-class-key" placeholder="Mật khẩu lớp nếu có" required />
+                <button type="button"
+                        class="password-toggle-button"
+                        onmousedown="showClassKey()"
+                        onmouseup="hideClassKey()"
+                        onmouseleave="hideClassKey()">
+                  👁
+                </button>
+              </div>
+              <button type="submit" class="btn mt-2">Đăng ký</button>
+              <p id="enroll-message" class="mt-2"></p>
+            </form>
+          </div>
+        </section>  
+
+        <section id="section-notifications" style="display: none;">
+          <h2>Thông báo</h2>
+          <ul id="notificationList" class="notification-list"></ul>
+        </section>
+
+        <!-- Section: Thông tin tài khoản -->
+        <section id="section-info" style="display: none;">
+          <h2>Thông tin tài khoản</h2>
+          <div id="account-info">
+            <!-- phần thông tin và form chỉnh sửa sẽ được student.js render vào đây -->
+          </div>
+        </section>      
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Modal xác nhận đăng xuất -->
+  <div id="modal-logout" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 400px; position: relative;">
+      <span class="close" onclick="closeModalLogout()" style="position: absolute; top: 10px; right: 10px; font-size: 24px; cursor: pointer;">&times;</span>
+      <h3>Đăng xuất</h3>
+      <p>Bạn có chắc chắn muốn đăng xuất?</p>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
+        <button class="btn btn-secondary" onclick="closeModalLogout()">Huỷ</button>
+        <button id="modal-logout-confirm" class="btn btn-red">Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Modal xác nhận hủy lớp -->
+  <div id="confirmUnenrollModal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 400px; position: relative;">
+      <span class="close" onclick="closeUnenrollModal()" style="position: absolute; top: 10px; right: 10px; font-size: 20px; cursor: pointer;">&times;</span>
+      <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+      <span style="font-weight: bold;">Hủy đăng ký lớp</span>
+      </h3>
+      <p id="unenrollModalText" style="margin-top: 1rem;">Bạn có chắc muốn hủy đăng ký lớp <strong>?</strong></p>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1.5rem;">
+        <button class="btn btn-secondary" onclick="closeUnenrollModal()">Huỷ</button>
+        <button class="btn btn-red" onclick="confirmUnenroll()">Hủy đăng ký</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Modal lịch sử điểm danh -->
+  <div id="attendanceHistoryModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeAttendanceModal()">&times;</span>
+      <h3>📅 Lịch sử điểm danh</h3>
+      <div id="attendance-history-content"></div>
+    </div>
+  </div>
+  
+  <script>
+    function showSection(section) {
+      const user = getCurrentUser();
+      const sections = ['dashboard', 'create', 'view', 'info', 'notifications'];
+      sections.forEach(id => {
+        const el = document.getElementById(`section-${id}`);
+        if (el) el.style.display = 'none';
+      });
+
+      const target = document.getElementById(`section-${section}`);
+      if (target) target.style.display = 'block';
+
+      document.querySelectorAll('.teacher-sidebar a').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.teacher-sidebar a[data-section="${section}"]`);
+      if (link) link.classList.add('active');
+
+      // Gọi các chức năng tương ứng
+      if (section === 'info') loadTeacherInfo();
+      if (section === 'notifications') {
+        loadNotifications(user.user_id, "teacherNotificationList");
+
+        // ✅ Gọi đánh dấu đã đọc & cập nhật badge
+        markAllNotificationsAsRead(user.user_id).then(() => {
+          updateNotifBadge(0, "teacherNotifBadge"); // Xoá số
+        });
+      }
+    }
+  </script>
+</body>
+</html>

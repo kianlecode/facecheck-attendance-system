@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang Giảng Viên</title>
+  <link rel="icon" href="static/img/neu-logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="/static/js/utils.js" defer></script>
+  <script src="/static/js/teacher.js" defer></script>
+</head>
+<body>
+  <div class="teacher-wrapper">
+    <div class="teacher-layout">
+      <!-- Sidebar -->
+      <div class="teacher-sidebar">
+        <h2>Giảng viên</h2>
+        <ul>
+          <li><a href="#" class="active" data-section="dashboard" onclick="showSection('dashboard')">Quản lý lớp học phần</a></li>
+          <li>
+            <a href="#" data-section="notifications" onclick="showSection('notifications')">
+              Thông báo <span id="teacherNotifBadge" class="notif-badge"></span>
+            </a>
+          </li>
+          <li><a href="#" data-section="info" onclick="showSection('info')">Thông tin tài khoản</a></li>
+          <li><a href="#" class="teacher-logout" onclick="showModalLogout()">Đăng xuất</a></li>
+        </ul>
+      </div>
+
+      <!-- Main content -->
+      <div class="teacher-content-scroll">
+      <div class="teacher-main">
+        <h2>Xin chào, <span id="teacherName">Giảng viên</span></h2>
+
+        <!-- Danh sách lớp học -->
+        <section id="section-dashboard">
+
+          <div class="tab-bar">
+            <button class="tab-button active" data-tab="list" onclick="switchTeacherTab('list')">Danh sách lớp</button>
+            <button class="tab-button" data-tab="create" onclick="switchTeacherTab('create')">Tạo lớp học phần</button>
+          </div>
+
+          <!-- Danh sách lớp học -->
+          <div id="teacher-tab-list">
+            <div class="filter-bar">
+              <input type="text" id="teacher-class-search" placeholder="🔍 Tìm theo mã hoặc tên lớp...">
+            </div>
+
+            <div class="class-container-wrapper">
+              <div id="classList" class="class-grid"></div>
+              <div id="classPagination" class="pagination-bar"></div>
+            </div>
+          </div>
+
+          <!-- Form tạo lớp -->
+          <div id="teacher-tab-create" style="display: none;">
+            <form id="createClassForm" class="form-create">
+              <input type="text" id="class_id" placeholder="Mã lớp học phần" required>
+              <input type="text" id="class_name" placeholder="Tên lớp học phần" required>
+              <input type="text" id="enrollment_key" placeholder="Mã đăng ký lớp (tuỳ chọn)">
+              <button type="submit" class="btn btn-blue">Tạo lớp</button>
+              <p id="createMsg" class="form-message"></p>
+            </form>
+          </div>
+
+        </section>
+
+        <!-- Section Thông báo -->
+        <section id="section-notifications" style="display: none;">
+          <h2>Thông báo</h2>
+          <ul id="teacherNotificationList" class="notification-list"></ul>
+        </section>
+
+        <!-- Thông tin tài khoản -->
+        <section id="section-info" style="display: none;">
+          <div id="account-info"></div>
+        </section>
+
+        <!-- Xem điểm danh -->
+        <section id="section-view" style="display: none;">
+          <h3>📜 Xem điểm danh</h3>
+          <div style="margin-bottom: 1rem;">
+            <label for="view_class">Chọn lớp:</label>
+            <select id="view_class" required>
+              <option value="">-- Chọn lớp --</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label for="view_session">Chọn phiên điểm danh:</label>
+            <select id="view_session" required>
+              <option value="">-- Chọn phiên --</option>
+            </select>
+          </div>
+          <button id="view_attendance_btn" class="btn-blue">Xem điểm danh</button>
+
+          <div id="attendance_result" style="margin-top: 2rem;">
+            <table id="attendance_table" style="width: 100%; display: none;">
+              <thead>
+                <tr>
+                  <th>Mã SV</th>
+                  <th>Họ tên</th>
+                  <th>Trạng thái</th>
+                  <th>Thời gian</th>
+                </tr>
+              </thead>
+              <tbody id="attendance_table_body"></tbody>
+            </table>
+            <p id="attendance_msg" style="margin-top: 1rem; color: red;"></p>
+          </div>
+        </section>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- ✅ Modal hiển thị danh sách sinh viên -->
+  <div id="studentModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeStudentModal()">&times;</span>
+      <h3>Danh sách sinh viên</h3>
+  
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 10px 0;">
+        <!-- Tìm sinh viên -->
+        <input
+          type="text"
+          placeholder="🔍 Tìm sinh viên..."
+          id="studentSearchInput"
+          class="add-student-input"
+          style="flex: 1; max-width: 300px;"
+        />
+      
+        <!-- Thêm sinh viên -->
+        <div style="display: flex; gap: 5px;">
+          <input
+            type="text"
+            id="addStudentInput"
+            placeholder="Nhập mã SV"
+            class="add-student-input"
+          />
+          <button
+            class="add-student-btn"
+            onclick="addStudentToClass()"
+          >
+            + Thêm SV
+          </button>
+        </div>
+      </div>
+  
+      <div id="studentModalBody">⏳ Đang tải...</div>
+    </div>
+  </div>
+
+
+  <!-- ✅ Modal xác nhận xoá sinh viên khỏi lớp -->
+  <div id="confirmDeleteModal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 400px;">
+      <span class="close" onclick="closeConfirmDelete()">&times;</span>
+      <h3>🗑 Xác nhận xoá sinh viên</h3>
+      <p id="confirmDeleteText">Bạn có chắc chắn muốn xoá sinh viên khỏi lớp này không?</p>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
+        <button id="confirmDeleteBtn" class="btn btn-red">Xoá</button>
+        <button class="btn btn-secondary" onclick="closeConfirmDelete()">Huỷ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Modal hiển thị danh sách phiên -->
+  <div id="sessionModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeSessionModal()">&times;</span>
+      <h3>Danh sách phiên điểm danh</h3>
+      <div id="sessionModalBody">⏳ Đang tải...</div>
+    </div>
+  </div>
+
+  <!-- Modal xác nhận xoá lớp học phần -->
+  <div id="modal-confirm-delete-class" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 400px;">
+      <h3>Xác nhận xoá lớp học phần</h3>
+      <p>Bạn có chắc chắn muốn xoá lớp học phần này không?</p>
+      <div class="modal-footer">
+        <button onclick="closeConfirmDeleteModal()" style="margin-right: 10px;">Huỷ</button>
+        <button id="confirmDeleteClassBtn" class="btn-red">Xoá</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal sửa lớp học phần -->
+  <div class="modal" id="modal-edit-class" style="display: none;">
+    <div class="modal-content" style="position: relative;">
+      <span class="close" onclick="closeEditModal()" style="position: absolute; top: 10px; right: 10px; font-size: 24px; cursor: pointer;">&times;</span>
+      <h2>Sửa lớp học phần</h2>
+      <form id="edit-class-form">
+        <div class="form-group">
+          <label for="edit-class-name">Tên lớp học phần:</label>
+          <div class="key-input-container">
+            <input type="text" id="edit-class-name" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="edit-class-key">Mã đăng ký:</label>
+          <div class="key-input-container">
+            <input type="password" id="edit-class-key" required />
+            <button type="button"
+                    class="class-key-toggle"
+                    onmousedown="togglePassword('edit-class-key', true)"
+                    onmouseup="togglePassword('edit-class-key', false)"
+                    onmouseleave="togglePassword('edit-class-key', false)">👁</button>
+          </div>
+        </div>
+        <div class="modal-actions" style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+          <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <button type="button" class="btn btn-red" onclick="openConfirmDeleteModal()">Xoá lớp học phần</button>
+          </div>
+          <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Huỷ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <!-- ✅ Modal tạo phiên điểm danh -->
+  <div id="createSessionModal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 500px;">
+      <span class="close" onclick="closeCreateSessionModal()">&times;</span>
+      <h3>Tạo phiên điểm danh</h3>
+      <div>
+        <label for="ontimeLimitInput">Giới hạn đúng giờ (phút):</label>
+        <input id="ontimeLimitInput" type="number" min="1" value="10" />
+        <div style="margin-bottom: 15px;">
+          <label style="margin-bottom: 10px;">Thời gian bắt đầu:</label>
+          <input type="datetime-local" id="sessionStartInput" required style="width: 100%;" />
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="margin-bottom: 10px;">Thời gian kết thúc:</label>
+          <input type="datetime-local" id="sessionEndInput" required style="width: 100%;" />
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button id="confirmCreateSessionBtn" class="btn-blue">Tạo</button>
+          <button class="btn btn-secondary" onclick="closeCreateSessionModal()" style="margin-right: 10px;">Huỷ</button>
+        </div>
+        <p id="createSessionMsg" style="margin-top: 10px;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Modal xác nhận đăng xuất -->
+  <div id="modal-logout" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 400px; position: relative;">
+      <span class="close" onclick="closeModalLogout()" style="position: absolute; top: 10px; right: 10px; font-size: 24px; cursor: pointer;">&times;</span>
+      <h3>Đăng xuất</h3>
+      <p>Bạn có chắc chắn muốn đăng xuất?</p>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
+        <button class="btn btn-secondary" onclick="closeModalLogout()">Huỷ</button>
+        <button id="modal-logout-confirm" class="btn btn-red">Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showSection(section) {
+      const user = getCurrentUser();
+      const sections = ['dashboard', 'create', 'view', 'info', 'notifications'];
+      sections.forEach(id => {
+        const el = document.getElementById(`section-${id}`);
+        if (el) el.style.display = 'none';
+      });
+    
+      const target = document.getElementById(`section-${section}`);
+      if (target) target.style.display = 'block';
+    
+      document.querySelectorAll('.teacher-sidebar a').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.teacher-sidebar a[data-section="${section}"]`);
+      if (link) link.classList.add('active');
+    
+      if (section === 'info') loadTeacherInfo();
+      if (section === 'notifications') {
+        loadNotifications(user.user_id, "teacherNotificationList");
+      }
+    }    
+  </script>
+</body>
+</html>
