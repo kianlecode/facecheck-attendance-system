@@ -366,6 +366,7 @@ def update_face(
         ))
 
         conn.commit()
+        notify_user(user_id, "✅📸 Bạn đã cập nhật ảnh khuôn mặt thành công.")
         return {"success": True, "message": "✅ Cập nhật ảnh khuôn mặt thành công."}
 
     except HTTPException as http_exc:

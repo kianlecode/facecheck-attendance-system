@@ -46,6 +46,6 @@ if (window.location.pathname.endsWith("register.html")) {
     sessionStorage.setItem("register_data", JSON.stringify(registerData));
 
     // Điều hướng sang bước xác thực khuôn mặt
-    window.location.href = "/biometric.html";
+    window.location.href = "/biometric.html?mode=register&from=register";
   };
 }

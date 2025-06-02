@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from models.db import get_db_connection
 import bcrypt
 from datetime import datetime
+from api.notification import notify_user
 import pytz
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -160,6 +161,11 @@ def grant_update_face(user_id: str = Body(...), allow: bool = Body(...)):
             (1 if allow else 0, user_id)
         )
         conn.commit()
+        if allow:
+            notify_user(
+                user_id,
+                "⚠️📸 Bạn đã được cấp quyền cập nhật ảnh khuôn mặt. Vui lòng thực hiện trong thời gian sớm nhất."
+            )
         return {
             "success": True,
             "message": f"{'✅ Đã cấp' if allow else '🚫 Đã thu'} quyền cập nhật ảnh khuôn mặt cho {user_id}"

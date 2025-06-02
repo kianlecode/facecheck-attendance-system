@@ -1,7 +1,6 @@
 # Ignore dữ liệu khuôn mặt và FAISS
 data/
 face_data/
-*.pt
 *.faiss
 
 # Ignore Python cache

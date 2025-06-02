@@ -17,16 +17,22 @@ def delete_all_users():
         conn.close()
 
 def delete_user_by_id(user_id: str):
-    """Xoá một người dùng theo user_id."""
+    """Xoá toàn bộ dữ liệu liên quan đến một người dùng theo user_id."""
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
+        cursor.execute("DELETE FROM attendance WHERE user_id = ?", (user_id,))
+
+        cursor.execute("DELETE FROM enrollments WHERE user_id = ?", (user_id,))
+
+        cursor.execute("DELETE FROM notifications WHERE user_id = ?", (user_id,))
+
         cursor.execute("DELETE FROM users WHERE user_id = ?", (user_id,))
         if cursor.rowcount == 0:
             print(f"⚠️ Không tìm thấy user với ID: {user_id}")
         else:
             conn.commit()
-            print(f"✅ Đã xoá user: {user_id}")
+            print(f"✅ Đã xoá toàn bộ dữ liệu của user: {user_id}")
     except Exception as e:
         print("🛑 Lỗi khi xoá user:", e)
     finally:

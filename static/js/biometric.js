@@ -94,16 +94,15 @@ if (window.location.pathname.endsWith("biometric.html")) {
     }, 300);
 
     async function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
       if (currentPose === "invalid") {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         requestAnimationFrame(loop);
         return;
       }
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
+      // Vẽ bounding box nếu có
       if (lastBox) {
         ctx.strokeStyle = "lime";
         ctx.lineWidth = 2;
@@ -118,6 +117,7 @@ if (window.location.pathname.endsWith("biometric.html")) {
       const expected = steps[currentStep];
       const now = Date.now();
 
+      // Hiển thị đúng/sai hướng và đếm số khung hợp lệ
       if (currentPose === expected && now - lastCheckTime >= POSE_CHECK_INTERVAL) {
         readyFrames++;
         lastCheckTime = now;
@@ -127,6 +127,7 @@ if (window.location.pathname.endsWith("biometric.html")) {
         faceMsg.textContent = `Bước ${currentStep + 1}/3: ${expected.toUpperCase()} ❌ (Góc hiện tại: ${currentPose})`;
       }
 
+      // Nếu đủ số khung hợp lệ → chụp ảnh
       if (readyFrames >= REQUIRED_FRAMES && captureCooldown === 0) {
         const dataUrl = canvas.toDataURL("image/jpeg");
         motionImages[expected] = dataUrl;
@@ -146,14 +147,19 @@ if (window.location.pathname.endsWith("biometric.html")) {
         }
       }
 
-      const next = steps[currentStep];
-      faceMsg.textContent = `Bước ${currentStep + 1}/3: ${next.toUpperCase()} ❌ (Hãy xoay mặt đúng hướng này để tiếp tục)`;
-
       if (captureCooldown > 0) captureCooldown--;
       requestAnimationFrame(loop);
     }
 
     loop();
+  }
+
+  const backBtn = document.getElementById("btn-back");
+  if (backBtn) {
+    const fromPage = new URLSearchParams(window.location.search).get("from") || "student";
+    backBtn.addEventListener("click", () => {
+      window.location.href = fromPage === "register" ? "register.html" : "student.html";
+    });
   }
 
   if (resetBtn) resetBtn.addEventListener("click", resetFlow);
@@ -174,8 +180,11 @@ if (window.location.pathname.endsWith("biometric.html")) {
         return;
       }
 
-      const currentUser = JSON.parse(sessionStorage.getItem("register_data") || "null");
-      if (!currentUser) {
+      const currentUser = isUpdateMode
+        ? getCurrentUser()
+        : JSON.parse(sessionStorage.getItem("register_data") || "null");
+
+      if (!currentUser || !currentUser.user_id) {
         if (msgEl) {
           msgEl.textContent = "❌ Không tìm thấy thông tin người dùng.";
           msgEl.style.color = "red";
@@ -224,8 +233,16 @@ if (window.location.pathname.endsWith("biometric.html")) {
               : "✅ Đăng ký thành công, đang chuyển về trang chủ...";
             msgEl.style.color = "green";
           }
+
+          const urlParams = new URLSearchParams(window.location.search);
+          const fromPage = urlParams.get("from") || "student";
+          console.log("FROM PAGE:", fromPage);
           setTimeout(() => {
-            window.location.href = "student.html";
+            if (fromPage === "register") {
+              window.location.href = "register.html";
+            } else {
+              window.location.href = "student.html";
+            }
           }, 2000);
         } else {
           if (msgEl) {

@@ -228,7 +228,7 @@ async function loadAccountInfo() {
       .then(res => res.json())
       .then(json => {
         if (json?.data?.can_update_face) {
-          window.location.href = "biometric.html?mode=update";
+          window.location.href = "biometric.html?mode=update&from=student";
         } else {
           const msg = document.getElementById("info-message");
           msg.textContent = "⚠️ Bạn chưa được cấp quyền cập nhật ảnh khuôn mặt.";

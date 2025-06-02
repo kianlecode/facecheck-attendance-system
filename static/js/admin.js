@@ -100,8 +100,12 @@ if (window.location.pathname.endsWith("admin.html")) {
               ${isActive ? 'Đang hoạt động' : 'Đã bị khoá'}
             </td>
             <td>
-              <input type="checkbox" ${user.can_update_face ? "checked" : ""} 
-                    onchange="toggleUpdateFace('${user.user_id}', this.checked)" />
+              ${
+                user.role === "student"
+                  ? `<input type="checkbox" ${user.can_update_face ? "checked" : ""} 
+                      onchange="toggleUpdateFace('${user.user_id}', this.checked')" />`
+                  : ""
+              }
             </td>
             <td>
               <button onclick="toggleUserStatus('${user.user_id}')">
@@ -114,13 +118,48 @@ if (window.location.pathname.endsWith("admin.html")) {
         },
         tableBody,
         pagination,
-        10 // Số dòng mỗi trang
+        6 // Số dòng mỗi trang
       );
     };
 
     loadBtn.click();
     setupModalLogout();
     showSection("list");
+
+    document.getElementById("grant-all-students").addEventListener("click", async () => {
+    const confirmed = confirm("Bạn có chắc muốn yêu cầu tất cả sinh viên cập nhật ảnh khuôn mặt?");
+    if (!confirmed) return;
+
+    const tableBody = document.getElementById("account-table-body");
+    const rows = Array.from(tableBody.querySelectorAll("tr"));
+
+    const studentIds = rows
+      .filter(row => row.cells[4]?.textContent.trim() === "student") // Cột role
+      .map(row => row.cells[0]?.textContent.trim()); // Cột user_id
+
+    if (!studentIds.length) {
+      alert("⚠ Không có sinh viên nào trong danh sách hiện tại.");
+      return;
+    }
+
+    let successCount = 0;
+    for (const user_id of studentIds) {
+      try {
+        const res = await fetch("/admin/grant_update_face", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ user_id, allow: true })
+        });
+        const json = await res.json();
+        if (json.success) successCount++;
+      } catch (err) {
+        console.error("❌ Lỗi khi gửi yêu cầu cho:", user_id, err);
+      }
+    }
+
+    alert(`✅ Đã gửi yêu cầu cập nhật ảnh cho ${successCount}/${studentIds.length} sinh viên.`);
+    document.getElementById("load-accounts").click(); // reload lại bảng
+  });
   }
 
   window.toggleUpdateFace = async function (user_id, allow) {
